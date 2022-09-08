@@ -67,15 +67,15 @@ def start_service (option):
        cmd = 'sshpass -p ' + option['vagrantpass'] + 'ssh vagrant@localhost cd /site/ad-local/ && make start-ad-all | lolcat'
        m_12_services = subprocess.check_output(cmd,shell=True)
     if options['only'] == 'ad-16' or 'all':
-       cmd = 'sshpass -p ' + option['ubuntupass'] + 'ssh ubuntu@localhost4 cd /site/ad-local/ && make start-ad-all | lolcat'
+       cmd = 'sshpass -p ' + option['ubuntupass'] + 'ssh ubuntu@localhost cd /site/ad-local/ && make start-ad-all | lolcat'
        m_16_services = subprocess.check_output(cmd,shell=True)
     return (m_12_services,m_16_services)
 
 def mount_directory (option):
     if options['only'] == 'ad-12' or 'all' :
-        cmd = 'echo' + option['vagrantpass'] + '| sshfs ubuntu@192.168.101.124:/ /home/af/Desktop/ad_1604 -o password_stdin'
+        cmd = 'echo' + option['vagrantpass'] + '| sshfs ubuntu@localhost:/ /home/af/Desktop/ad_1604 -o password_stdin'
         m_12_mount = subprocess.check_output(cmd,shell=True)
     if options['only'] == 'ad-16' or 'all':
-        cmd = 'echo' + option['ubuntupass'] + '| sshfs ubuntu@192.168.101.164:/ /home/af/Desktop/ad_1604 -o password_stdin'
+        cmd = 'echo' + option['ubuntupass'] + '| sshfs ubuntu@localhost:/ /home/af/Desktop/ad_1604 -o password_stdin'
 if __name__ == "__main__":
     main()
